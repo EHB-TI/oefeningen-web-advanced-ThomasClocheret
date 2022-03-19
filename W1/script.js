@@ -9,14 +9,14 @@ alert("Hello World");
 
 
 //Oefening 2
-let a = 10;
-a += 5;
-console.log(a);
+let getal = 10;
+getal += 5;
+console.log(getal);
 
 //Oefening 3
 
 
-var age = window.prompt('Leeftijd?');
+var age = window.prompt('Leeftijd?'); //Gewoon promt() is ook mogelijk 
 
 if (age >= 18)
 {
@@ -24,24 +24,15 @@ if (age >= 18)
 }
 else
 {
-    console.log('nog geen 18')
-}
-
-var age = prompt('Leeftijd?').value;
-
-if (age >= 18)
-{
-    console.log('Welkom!');
-}
-else
-{
-    console.log('Nog geen 18')
+    console.log('nog geen 18');
 }
 
 //Oefening 4
 
-let btn = document.getElementsByTagName("button")[0].onclick = function(){
-    event.preventDefault(); // niet refreshen 
+let btn1 = document.getElementById("btn1");
+
+btn1.addEventListener("click", function(){
+    //event.preventDefault(); // niet refreshen 
     let name = document.getElementById("name").value;
     let age = document.getElementById("age").value;
     function calcAge(){
@@ -55,45 +46,39 @@ let btn = document.getElementsByTagName("button")[0].onclick = function(){
         }
     };
     calcAge();
-}
+})
+
 
 //Oefening 7
 
-let zin = "hallo allemaal";
+let woord = "hallo";
 
-function setHooftLetter(zin){
+function setHooftLetter(woord){
 
-    let eersteLetter = (zin.charAt(0)).toUpperCase();   //We selecteren de eerste letter en maken er een hooftletter van
-    let restZin = zin.slice(1);                         //We snijden na de eerste letter de zin af
+    let eersteLetter = (woord.charAt(0)).toUpperCase();   //We selecteren de eerste letter en maken er een hooftletter van
+    let restWoord = zin.slice(1);                         //We snijden na de eerste letter de zin af
 
-    let newZin = `${eersteLetter}${restZin}`;           //We plakken ze weer samen
-    console.log(newZin);
+    let newWoord = `${eersteLetter}${restWoord}`;           //We plakken ze weer samen
+    console.log(newWoord);
 }
-setHooftLetter(zin);
-
+setHooftLetter(woord);
 
 //Oefening 8
+ 
 
-let zin = "Judas Van Bergen";
-let zinLengte = zin.length;
-let tellerLengte = 0;
+let naam = "judas de verader";
 
-while(zinLengte > tellerLengte)
-{
-    let name = zin.slice(tellerLengte, zin.indexOf(" "));         // We scheiden de eerste naam van de volledige naam
-    let lengte = name.length;                                     // We bepalen de lengte van de voornaam
-    tellerLengte += lengte;
-    let nieuweNaam = setHooftLetter(name);
-    let nieuweZin = ` ${nieuweNaam}`;
-    console.log(nieuweZin);
+function test(naam){
+    let word = naam.trim();
+    let words = word.split(" ");
+    for(let i = 0; i < words.length; i++) // of for(let i in words);
+    {
+        console.log(words);
+        words[i] = words[i].slice(0,1).toUpperCase()+words[i].substring(1);
+    }
+    console.log(words.join(" "));
 }
-
-function setHooftLetter(zin){
-
-    let eersteLetter = (zin.charAt(0)).toUpperCase();   
-    let restZin = zin.slice(1);                       
-    return `${eersteLetter}${restZin}`;        
-}
+test(naam);
 
 //Oefening 9
 
@@ -108,21 +93,26 @@ console.log(change);
 
 
 let landen = [];
+let teller = 0;
 
-let btn2 = document.getElementsByTagName("button")[1].onclick = function(landen){
+let btn2 = document.getElementById("btn2").onclick = function(){
     let land = document.getElementById('land').value;
-    landen.push("land");
+    fullArray(land);
+    teller++;
+};
+let fullArray = function(land){
+    landen.push(land);
+}
+
+let btn3 = document.getElementById("btn3").onclick = function(){
+    lengteLand();
 };
 
-let btn3 = document.getElementsByTagName("button")[2].onclick = function(){
-    console.log(landen);
-    lengteLand(landen);
-};
 
-let lengteLand = function(landen){
-    let lengte = landen.length;
-    let max = " ";
-    for(let i = 0; i < lengte; i++)
+let lengteLand = function(){
+    
+    let max = "";
+    for(let i = 0; i < teller; i++)
     {
         if (landen[i].length > max)
         {
@@ -132,14 +122,55 @@ let lengteLand = function(landen){
     console.log(max);
 };
 
-
-
 // DATE print huidige date 
 
 let date = new Date();
 console.log(date);
 
-let huidigeTijd = `${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+var mL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+let month = mL[getMonth];
+/*
+let month;
+switch(date.getMonth()){
+    case 0: 
+        month ="Jan";
+        break;
+    case 1: 
+        month ="Feb";
+        break;
+    case 2: 
+        month ="Mar";
+        break;
+    case 3: 
+        month ="Apr";
+        break;
+    case 4: 
+        month ="May";
+        break;
+    case 5: 
+        month ="Jun";
+        break;
+    case 6: 
+        month ="Jul";
+        break;
+    case 7: 
+        month ="Aug";
+        break;
+    case 8: 
+        month ="Sep";
+        break;
+    case 9: 
+        month ="Oct";
+        break;
+    case 10: 
+        month ="Nov";
+        break;
+    case 11:
+        month = "Dec";
+}
+*/
+
+let huidigeTijd = `${date.getDate()} ${month} ${date.getFullYear()}`
 
 document.getElementById("date").innerHTML = huidigeTijd;
 
@@ -153,7 +184,30 @@ const verjaardagM = 1;
 let dagen = date.getDate;
 let maanden = date.getMonth;
 
-let aantalDagen //????
+let aantalDagen;
+
+if(maanden > 2){
+    var a = (12 - maanden)%2;
+    if(a == 0)
+    {
+        var b = (12 - maanden)/2;
+        aantalDagen = b*30 + b+31 + 53;
+    }
+    else if(a != 0){
+        var c = ((12 - maanden)-1)/2
+        aantalDagen = b*30 + b+31 + 53 + 30;
+    }
+    if((12 - maanden)>6){
+        aantalDagen++;
+    }
+    aantalDagen - dagen;
+}
+else if(maanden < 2){
+    aantalDagen = 53 - dagen;
+}
+else if (maanden == 2){
+    aantalDagen = 22 - dagen;
+}
 
 if(dagen === verjaardagD && maanden === verjaardagM)
 {
@@ -163,4 +217,3 @@ else
 {
     document.getElementById("date2").innerHTML = ` nog ${aantalDagen} en dan is het je verjaardag!`;
 }
-
